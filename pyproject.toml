@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "old-shap"
+version = "0.1.0"
+description = ""
+authors = ["Elias Tavarez <etav@umich.edu>"]
+readme = "README.md"
+packages = [{include = "old_shap"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+llvmlite = "^0.40.1"
+numba = "^0.57.1"
+shap = "^0.42.1"
+pandas = "^2.1.0"
+sklearn = "^0.0.post9"
+xgboost = "^2.0.0"
+matplotlib = "^3.7.3"
+kaggle = "^1.5.16"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.25.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
