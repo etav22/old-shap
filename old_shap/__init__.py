@@ -14,17 +14,18 @@ class DataHandler:
         return pct_missing
 
     def drop_columns(self, columns: list) -> pd.DataFrame:
-        self.df = self.df.drop(columns=columns)
+        self.df = self.df.drop(columns=columns, axis=1)
         return self.df.head()
 
     def one_hot_encode(self, features: list, concat: bool = False) -> pd.DataFrame:
-        ohe = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
+        ohe = OneHotEncoder(sparse_output=False)
         ohe_array = ohe.fit_transform(self.df[features])
         ohe_df = pd.DataFrame(ohe_array, columns=ohe.get_feature_names_out(features))
         logger.info(f"Number of new features: {ohe_df.shape[1]}")
 
         if concat:
             self.df = pd.concat([self.df, ohe_df], axis=1)
+            self.df = self.df.drop(columns=features)
             return self.df.head()
         else:
             return ohe_df
